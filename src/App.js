@@ -24,7 +24,7 @@ mobileNumber:"",
 country:"",
 birth:"",
 password:"",
-selectedHobbies:null,
+selectedProduct:null,
 selectedGender:null,
 address:"",
 
@@ -93,18 +93,20 @@ async function handleSubmit(e){
     <div className="App">
 
 
- <div className='container'>
 <h1>Contact Form</h1>
 
 <h2>Get in touch with us</h2>
 
 
 <form className='form'  onSubmit={handleSubmit} >
+<div className='container'>
+
 
 
 <div className='label-input-group' >
-<label>First Name</label>
+<label htmlFor='orange'>First Name</label>
 <input 
+id='orange'
 type='text' 
 name="firstname" 
 value={values.firstName} 
@@ -120,8 +122,9 @@ onChange={(e) => {
 </div>
 
 <div className='label-input-group' >
-<label>Last Name</label>
+<label  htmlFor='banana'>Last Name</label>
 <input 
+id='banana'
 type='text' 
 name="lastname" 
 value={values.lastName} 
@@ -139,8 +142,9 @@ onChange={(e) => {
 
 
 <div className='label-input-group'>
-<label>Date of Birth</label>
-<input 
+<label  htmlFor='apple' >Date of Birth</label>
+<input
+id='apple' 
 type='date'
 name='birth'
 value={values.birth}
@@ -155,9 +159,10 @@ birth: e.target.value,
 
 
 <div className='label-input-group'>
-<label>Gender</label>
-<label>
+<label   >Gender</label>
+<label  >
 <input 
+
 type='radio'
 name='radio'
 value={'Female'}
@@ -171,8 +176,9 @@ selectedGender: e.target.value,
 </label>
 
 
-<label>
+<label htmlFor='kiwi'>
 <input 
+id='kiwi'
 type='radio'
 name='radio'
 value={'Male'}
@@ -188,8 +194,9 @@ selectedGender: e.target.value,
 
 
 <div className='label-input-group' >
-<label>Mobile Number</label>
+<label htmlFor='lemon'>Mobile Number</label>
 <input 
+id='lemon'
 type='text' 
 name="mobilenumber" 
 value={values.mobileNumber} 
@@ -211,8 +218,9 @@ onChange={(e) => {
 
 
 <div className='label-input-group' >
-<label>Email</label>
+<label htmlFor='melon'>Email</label>
 <input 
+id='melon'
 type='email'
 name='email'
 value={values.email}
@@ -228,8 +236,9 @@ email: e.target.value,
 
 
 <div className='label-input-group'>
-<label >Password</label>
+<label htmlFor='cherry' >Password</label>
 <input 
+id='cherry'
 type='password'
 name='password'
 value={values.password}
@@ -244,33 +253,40 @@ password: e.target.value,
 
 <div className='label-input-group'>
 <label>Your Product</label>
+
 <label>
+
 <input 
 type='checkbox' 
 // checked = {hobbies.football}
 // onChange={() => setHobbies({ ...hobbies, football: !hobbies.football })}
-value={'Football'}
-checked = {values.selectedHobbies === "Football"}
+value={'XPad'}
+checked = {values.selectedProduct === 'XPad'}
 onChange={(e) => {setValues((values) => ({
   ...values,
-selectedHobbies: e.target.value,
+selectedProduct: e.target.value,
 }));}}
 />
-Football</label>
+
+XPad
+</label>
+
+
+
 <label>
 <input 
 type='checkbox' 
-value={'Basketball'}
+value={'XPad Pro'}
 // checked = {selectedHobbies === "Basketball"}
-checked = {values.selectedHobbies === "Basketball"}
+checked = {values.selectedProduct === 'XPad Pro'}
 onChange={(e) =>{setValues((values) => ({
   ...values,
-selectedHobbies: e.target.value,
+selectedProduct: e.target.value,
 }));}}
 // checked = {hobbies.basketball}
 // onChange={() => setHobbies({ ...hobbies, basketball: !hobbies.basketball })}
 />
-Basketball</label>
+XPad Pro</label>
 </div>
 
 
@@ -282,8 +298,9 @@ Basketball</label>
 
 
 <div className='label-input-group'>
-<label>Country</label> 
+<label htmlFor='plum'>Country</label> 
 <select
+id='plum'
 value={values.country}
 name='country'
 onChange={(e) => { setValues((values) => ({
@@ -311,10 +328,10 @@ onChange={(e) => { setValues((values) => ({
 
 
 <div className='label-input-group'>
-<label>Adress</label>
+<label htmlFor='pear'>Product Feedback</label>
 <textarea 
-rows="4" 
-cols="40"
+id='pear'
+
 value={values.address}
 onChange={(e) =>{setValues((values) => ({
   ...values,
@@ -337,9 +354,9 @@ address: e.target.value,
 
 
 
-
-</form>
 </div> 
+</form>
+
     </div>
   );
 }
