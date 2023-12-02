@@ -158,8 +158,9 @@ birth: e.target.value,
 
 
 
-<div className='label-input-group'>
-<label   >Gender</label>
+<div className='label-input-group ' id='gender'>
+
+<label >Gender</label>
 <label  >
 <input 
 
@@ -251,7 +252,7 @@ password: e.target.value,
 
 
 
-<div className='label-input-group'>
+<div className='label-input-group' id='checkbox'>
 <label>Your Product</label>
 
 <label>
@@ -330,6 +331,7 @@ onChange={(e) => { setValues((values) => ({
 <div className='label-input-group'>
 <label htmlFor='pear'>Product Feedback</label>
 <textarea 
+placeholder='Your comment...'
 id='pear'
 
 value={values.address}
@@ -345,8 +347,8 @@ address: e.target.value,
 
 
 <div className='btn-container'>
-<button type='submit' className='submit'>Submit</button>
-<button className='reset' >Reset</button>
+<button  className='submit'>Submit</button>
+<button className='reset' >Undo</button>
 </div>
 
 
