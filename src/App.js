@@ -26,7 +26,7 @@ birth:"",
 password:"",
 selectedProduct:null,
 selectedGender:null,
-address:"",
+feedback:"",
 
   })
 
@@ -34,21 +34,22 @@ const countries = ['--Choose Country--', 'Turkey', 'Germany', 'United States', '
 
 
 const userSchema = yup.object().shape({
-
-mail:yup.string().email().required(),
-birth:yup.string().required(),
-country:yup.string().required(),
-selectedHobbies:yup.string().required(),
-selectedGender:yup.string().required(),
-address:yup.string().required(),
-
-//  hobbies:yup.array().required(),
-// password:yup.string().min(4).max(10).required()
-password: yup.string().min(4, 'Password must be at least 4 characters').max(30, 'Password is too long').required('Password is required'),
-
-
-
-})
+  firstName:yup.string().required(),
+  lastName:yup.string().required(),
+  email: yup.string().email().required(),
+  mobileNumber: yup.string().required('Mobile number is required'),
+  country: yup.string().required( 'Country is required'),
+  birth: yup.date().required('Birth date is required'),
+  password:yup.string()
+  // .matches(
+  //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+  //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+  // )
+  .required('Required'),
+  selectedProducts: yup.array().min(1, 'Select at least one product'),
+  selectedGender: yup.string().oneOf(['Male', 'Female'], 'Select a gender').required('Gender is required'),
+  feedback:yup.string().required('Description is required'),
+});
 
 
 
@@ -60,15 +61,37 @@ async function handleSubmit(e){
   // hobbies: selectedHobbies
   const formData = {values}
   console.log(formData)
- 
-   try {
-     await userSchema.validate(formData, { abortEarly: false });
-     console.log('Validation successful');
-     // Continue with form submission or other actions
-   } catch (error) {
-     console.error('Validation error:', error.errors);
+
+  try {
+    const validatedData = await userSchema.validate(values, { abortEarly: false });
+    console.log('Validation successful:', validatedData);
+  
+    // Do something with validatedData, e.g., send it to the server
+    // ...
+  
+  } catch (error) {
+    const errors = {};
+    error.inner.forEach((err) => {
+      errors[err.path] = err.message;
+    });
+    setValidationErrors(errors);
+    console.error('Validation error:', errors);
     // Handle validation errors (display error messages, etc.)
-   }
+  }
+  
+
+
+
+  
+ 
+  //  try {
+  //    await userSchema.validate(values, { abortEarly: false });
+  //    console.log('Validation successful');
+  //    // Continue with form submission or other actions
+  //  } catch (error) {
+  //    console.error('Validation error:', error.errors);
+  //   // Handle validation errors (display error messages, etc.)
+  //  }
 
 
   // try {
@@ -119,6 +142,8 @@ onChange={(e) => {
 // setValues(e.target.value)
 }
 } />
+ {validationErrors.firstName && <span className="error">{validationErrors.firstName}</span>}
+
 </div>
 
 <div className='label-input-group' >
@@ -231,7 +256,7 @@ email: e.target.value,
 }));
 }}
 />
-{validationErrors.name && <p className="error">{validationErrors.name}</p>}
+{validationErrors.email && <span className="error">{validationErrors.email}</span>}
 </div>
 
 
@@ -337,7 +362,7 @@ id='pear'
 value={values.address}
 onChange={(e) =>{setValues((values) => ({
   ...values,
-address: e.target.value,
+feedback: e.target.value,
 }));}}
 />
 
