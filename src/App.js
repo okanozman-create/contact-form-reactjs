@@ -1,9 +1,30 @@
-import { useState } from 'react';
-import * as yup from 'yup'
+import { useState,useEffect } from 'react';
+import * as yup from 'yup';
+import Select from 'react-select';
 
 
 
 export default function App() {
+
+
+
+  const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState({});
+  useEffect(() => {
+    fetch(
+      "https://valid.layercode.workers.dev/list/countries?format=select&flags=true&value=code"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setCountries(data.countries);
+        setSelectedCountry(data.userSelectValue);
+      });
+  }, []);
+
+
+
+
+
 
 //   const [name, setName] = useState("")
 //   const [mail, setMail] = useState("")
@@ -21,34 +42,35 @@ firstName:"",
 lastName:"",
 email:"",
 mobileNumber:"",
-country:"",
+ country:"",
 birth:"",
 password:"",
 selectedProduct:null,
 selectedGender:null,
 feedback:"",
+country:""
 
   })
 
-const countries = ['--Choose Country--', 'Turkey', 'Germany', 'United States', 'France', 'Italy', 'Spain']; 
+// const countries = ['--Choose Country--', 'Turkey', 'Germany', 'United States', 'France', 'Italy', 'Spain']; 
 
 
 const userSchema = yup.object().shape({
-  firstName:yup.string().required(),
-  lastName:yup.string().required(),
-  email: yup.string().email().required(),
-  mobileNumber: yup.string().required('Mobile number is required'),
-  country: yup.string().required( 'Country is required'),
+  firstName:yup.string().required("firstName is required"),
+  lastName:yup.string().required("lastName is required"),
+  email: yup.string().email().required("Email is required"),
+  mobileNumber: yup.string(),
+ country: yup.string().required( 'Country is required'),
   birth: yup.date().required('Birth date is required'),
-  password:yup.string()
+  password:yup.string().required('Required'),
   // .matches(
   //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
   //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
   // )
-  .required('Required'),
+ 
   selectedProducts: yup.array().min(1, 'Select at least one product'),
-  selectedGender: yup.string().oneOf(['Male', 'Female'], 'Select a gender').required('Gender is required'),
-  feedback:yup.string().required('Description is required'),
+  selectedGender: yup.string().oneOf(['Male', 'Female'], 'Select a gender'),
+  feedback:yup.string().required('Feedback is required'),
 });
 
 
@@ -79,35 +101,10 @@ async function handleSubmit(e){
     // Handle validation errors (display error messages, etc.)
   }
   
-
-
-
-  
- 
-  //  try {
-  //    await userSchema.validate(values, { abortEarly: false });
-  //    console.log('Validation successful');
-  //    // Continue with form submission or other actions
-  //  } catch (error) {
-  //    console.error('Validation error:', error.errors);
-  //   // Handle validation errors (display error messages, etc.)
-  //  }
-
-
-  // try {
-  //   await userSchema.validate(formData, { abortEarly: false });
-  //   // Clear previous validation errors on successful validation
-  //   setValidationErrors({});
-  //   console.log('Validation successful');
-  //   // Continue with form submission or other actions
-  // } catch (error) {
-  //   const errors = {};
-  //   error.inner.forEach((err) => {
-  //     errors[err.path] = err.message;
-  //   });
-  //   setValidationErrors(errors);
-  // }
 }
+
+
+// const Form() {}
 
 
 
@@ -126,8 +123,11 @@ async function handleSubmit(e){
 
 
 
-<div className='label-input-group' >
+{/* <div className='label-input-group error' > */}
+<div className={`label-input-group ${validationErrors.firstName && 'error'}`}> 
 <label htmlFor='orange'>First Name</label>
+
+
 <input 
 id='orange'
 type='text' 
@@ -142,7 +142,14 @@ onChange={(e) => {
 // setValues(e.target.value)
 }
 } />
- {validationErrors.firstName && <span className="error">{validationErrors.firstName}</span>}
+
+{validationErrors.firstName &&
+<div className='error-container'>
+ <span className="error-msg">{validationErrors.firstName}</span>
+</div>
+}
+
+
 
 </div>
 
@@ -186,9 +193,13 @@ birth: e.target.value,
 <div className='label-input-group ' id='gender'>
 
 <label >Gender</label>
-<label  >
-<input 
 
+
+
+ <label htmlFor='milk' > 
+
+<input 
+ id='milk'
 type='radio'
 name='radio'
 value={'Female'}
@@ -199,22 +210,30 @@ onChange={(e) =>{setValues((values) => ({
 selectedGender: e.target.value,
 }));}}
 />Female
-</label>
+ </label> 
 
 
-<label htmlFor='kiwi'>
+
+
+
+ <label htmlFor='kiwi'>
 <input 
+
 id='kiwi'
 type='radio'
-name='radio'
+name='radioo'
 value={'Male'}
 checked = {values.selectedGender === "Male"}
 onChange={(e) =>{setValues((values) => ({
   ...values,
 selectedGender: e.target.value,
 }));}}
-/>Male
-</label>
+/>
+
+Male
+ </label> 
+
+
 </div>
 
 
@@ -256,7 +275,9 @@ email: e.target.value,
 }));
 }}
 />
+{/* <div>
 {validationErrors.email && <span className="error">{validationErrors.email}</span>}
+</div> */}
 </div>
 
 
@@ -323,7 +344,7 @@ XPad Pro</label>
 
 
 
-<div className='label-input-group'>
+{/* <div className='label-input-group'>
 <label htmlFor='plum'>Country</label> 
 <select
 id='plum'
@@ -338,10 +359,37 @@ onChange={(e) => { setValues((values) => ({
 {countries.map((el,i) => <option value={el} key={i}>{el}</option> )
 }
 </select>
-</div>
+</div> */}
+
+{/* <div className='label-input-group'>
+<select  options={countries}
+      value={selectedCountry}
+      onChange={(selectedOption) => setSelectedCountry(selectedOption)}></select>
+
+</div> */}
 
 
 
+
+
+
+ <div className='label-input-group'>
+<label htmlFor='plum'>Country</label> 
+<select
+id='plum'
+value={selectedCountry}
+name='country'
+onChange={() => { setSelectedCountry((values) => ({
+  ...values,
+  country: selectedCountry,
+}));
+}}
+>
+{/* <option >{data.countries}</option> */}
+{/* {countries.map((el,i) => <option value={el} key={i}>{el}</option> )
+} */}
+</select>
+</div> 
 
 
 
