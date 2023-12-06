@@ -2,44 +2,31 @@ import { useState, useEffect } from "react";
 import * as yup from "yup";
 import Select from "react-select";
 
+
+
+
 export default function App() {
+  const [shouldValidate, setShouldValidate] = useState(true);
   const [countries, setCountries] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState({});
-  const [validationErrors, setValidationErrors] = useState({});
+  const [selectedCountry, setSelectedCountry] = useState( {value: '', label: '---Choose Country---'});
+  // console.log(selectedCountry)
 
-  const [values, setValues] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    mobileNumber: "",
+  const [validationErrors, setValidationErrors] = useState("");
 
-    birth: "",
-    password: "",
-    selectedProduct: null,
-    selectedGender: null,
-    feedback: "",
-    country: {selectedCountry},
-  });
+  const [values, setValues] = useState({ firstName: "",
+  lastName: "",
+  email: "",
+  mobileNumber: "",
+  birth: "",
+  password: "",
+  selectedProduct: null,
+  selectedGender: null,
+  feedback: "",});
 
-  // const countries = ['--Choose Country--', 'Turkey', 'Germany', 'United States', 'France', 'Italy', 'Spain'];
 
-  // useEffect(() => {
-  //   fetch(
-  //     "https://valid.layercode.workers.dev/list/countries?format=select&flags=true&value=code"
-  //   )
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log(data)
-  //       const dataCountry = data.countries
-  //       setCountries(dataCountry);
-  //       console.log(countries)
-  //        setSelectedCountry(data.userSelectValue);
-  //     });
-  // }, []);
 
   const CountrySelect = () => {
-    const [countries, setCountries] = useState([]);
-    const [selectedCountry, setSelectedCountry] = useState({});
+   
 
     useEffect(() => {
       fetch(
@@ -54,16 +41,9 @@ export default function App() {
     return (
       <Select
         options={countries}
-        value={selectedCountry}
+        value={selectedCountry }
          onChange={(selectedOption) => setSelectedCountry(selectedOption)}
-        // onChange={(e) => {
-        //   setValues((values) => ({
-        //     ...values,
-        //     // country: e.target.value
-        //   }));
-        //   // setValues(e.target.value)
-        // }}
-      />
+       />
     );
   };
 
@@ -72,13 +52,15 @@ export default function App() {
     lastName: yup.string().required("lastName is required"),
     email: yup.string().email().required("Email is required"),
     mobileNumber: yup.string(),
-    country: yup.string().required("Country is required"),
-    birth: yup.date().required("Birth date is required"),
+  
+    // birth: yup.date().required("Birth date is required"),
+    selectedCountry:yup.object().required("Country is required"),
     password: yup.string().required("Required"),
+
     // .matches(
-    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-    //   "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
-    // )
+    //    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+    //    "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+    //  ),
 
     selectedProducts: yup.array().min(1, "Select at least one product"),
     selectedGender: yup.string().oneOf(["Male", "Female"], "Select a gender"),
@@ -89,12 +71,12 @@ export default function App() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const formData = { values };
+    const formData = { ...values,selectedCountry };
     console.log(formData);
-    console.log(countries);
-
+  
+if(shouldValidate){
     try {
-      const validatedData = await userSchema.validate(values, {
+      const validatedData = await userSchema.validate(formData,  {
         abortEarly: false,
       });
       console.log("Validation successful:", validatedData);
@@ -106,11 +88,34 @@ export default function App() {
       error.inner.forEach((err) => {
         errors[err.path] = err.message;
       });
-      setValidationErrors(errors);
-      console.error("Validation error:", errors);
-      // Handle validation errors (display error messages, etc.)
+
     }
+
   }
+  console.log("Form submitted");
+
+  }
+
+   function handleDeleteForm () {
+setValues({ firstName: "",
+lastName: "",
+email: "",
+mobileNumber: "",
+birth: "",
+password: "",
+selectedProduct: null,
+selectedGender: null,
+feedback: "",});
+
+setSelectedCountry( 
+  {value: '', label: '---Choose Country---'});
+
+//  setValidationErrors("");
+setShouldValidate(false)
+
+
+   }
+
 
   return (
     <div className="App">
@@ -118,6 +123,7 @@ export default function App() {
       <h2>Get in touch with us</h2>
 
       <Form
+
         countries={countries}
         selectedCountry={selectedCountry}
         validationErrors={validationErrors}
@@ -128,10 +134,19 @@ export default function App() {
         setValues={setValues}
         handleSubmit={handleSubmit}
         countrySelect={CountrySelect}
+        handleDeleteForm={handleDeleteForm}
       />
     </div>
   );
 }
+
+
+
+
+
+
+
+
 
 function Form({
   countries,
@@ -144,6 +159,8 @@ function Form({
   setValues,
   handleSubmit,
   countrySelect,
+  handleDeleteForm
+
 }) {
   return (
     <div>
@@ -353,7 +370,7 @@ function Form({
             <textarea
               placeholder="Your comment..."
               id="pear"
-              value={values.address}
+              value={values.feedback}
               onChange={(e) => {
                 setValues((values) => ({
                   ...values,
@@ -364,8 +381,8 @@ function Form({
           </div>
 
           <div className="btn-container">
-            <button className="submit">Submit</button>
-            <button className="reset">Undo</button>
+            <button className="submit" >Submit</button>
+            <button className="reset"  onClick={handleDeleteForm}>Undo</button>
           </div>
         </div>
       </form>
