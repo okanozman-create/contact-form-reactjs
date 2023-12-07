@@ -44,7 +44,6 @@ label {
 }
 
 input,
-.countrySelect,
 textarea {
   flex: 1; /* Take up remaining space */
   padding: 0.4rem;
@@ -61,9 +60,14 @@ textarea {
   display:none
  
 } */
-
-.countrySelect {
+.countrySelect:focus {  outline: 2px solid #d71ef7;}
+.countrySelect{
   box-shadow: none;
+
+  flex: 1; /* Take up remaining space */
+  padding: 0.4rem;
+  font-size: 1.8rem;
+  border: none;
 }
 
 input {
@@ -98,6 +102,7 @@ h2 {
 textarea {
   resize: none;
   padding: 0.8rem;
+  max-width: 100%;
 }
 
 /* input[type="radio"]{
@@ -267,6 +272,13 @@ input[type="radio"]:focus {
   line-height: 37px;
   outline: none;
 }
+
+.error.label-input-group textarea {
+  border: 2px solid #cc0033;
+  line-height: 37px;
+  outline: none;
+}
+
 
 .error.label-input-group .status {
   display: none;

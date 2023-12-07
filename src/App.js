@@ -5,13 +5,15 @@ import Select from "react-select";
 
 
 
-export default function App() {
-  const [shouldValidate, setShouldValidate] = useState(true);
-  const [countries, setCountries] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState( {value: '', label: '---Choose Country---'});
-  // console.log(selectedCountry)
 
-  const [validationErrors, setValidationErrors] = useState("");
+export default function App() {
+  
+  const [countries, setCountries] = useState([]);
+  // console.log(countries)
+  const [selectedCountry, setSelectedCountry] = useState( {value: '', label: '---Choose Country---'}); 
+  // console.log(selectedCountry)
+  const [validationErrors, setValidationErrors] = useState({});
+  console.log()
 
   const [values, setValues] = useState({ firstName: "",
   lastName: "",
@@ -41,31 +43,29 @@ export default function App() {
     return (
       <Select
         options={countries}
-        value={selectedCountry }
-         onChange={(selectedOption) => setSelectedCountry(selectedOption)}
+        value= {selectedCountry} 
+         onChange={(a) => setSelectedCountry(a)}
        />
     );
   };
 
   const userSchema = yup.object().shape({
-    firstName: yup.string().required("firstName is required"),
-    lastName: yup.string().required("lastName is required"),
+    firstName: yup.string().required("FirstName is required"),
+    lastName: yup.string().required("LastName is required"),
     email: yup.string().email().required("Email is required"),
-    mobileNumber: yup.string(),
-  
-    // birth: yup.date().required("Birth date is required"),
+    password: yup.string().required("Password is Required"),
+    birth: yup.date().required("Birth date is required"),
     selectedCountry:yup.object().required("Country is required"),
-    password: yup.string().required("Required"),
-
-    // .matches(
+    feedback: yup.string().required("Feedback is required"),
+    selectedProducts: yup.array().min(1, "Select at least one product").required(),
+            // .matches(
     //    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
     //    "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
     //  ),
 
-    selectedProducts: yup.array().min(1, "Select at least one product"),
+    mobileNumber: yup.string(),
     selectedGender: yup.string().oneOf(["Male", "Female"], "Select a gender"),
-    feedback: yup.string().required("Feedback is required"),
-  });
+});
 
 
   async function handleSubmit(e) {
@@ -74,12 +74,13 @@ export default function App() {
     const formData = { ...values,selectedCountry };
     console.log(formData);
   
-if(shouldValidate){
+
     try {
       const validatedData = await userSchema.validate(formData,  {
         abortEarly: false,
       });
       console.log("Validation successful:", validatedData);
+      console.log("Form submitted");
 
       // Do something with validatedData, e.g., send it to the server
       // ...
@@ -88,15 +89,19 @@ if(shouldValidate){
       error.inner.forEach((err) => {
         errors[err.path] = err.message;
       });
-
+  console.error("Error:", errors)
+setValidationErrors(errors)
     }
 
   }
-  console.log("Form submitted");
+ 
 
-  }
+
 
    function handleDeleteForm () {
+
+
+
 setValues({ firstName: "",
 lastName: "",
 email: "",
@@ -110,8 +115,10 @@ feedback: "",});
 setSelectedCountry( 
   {value: '', label: '---Choose Country---'});
 
-//  setValidationErrors("");
-setShouldValidate(false)
+
+  setTimeout(() => {
+    setValidationErrors({});
+  }, 0)
 
 
    }
@@ -123,14 +130,11 @@ setShouldValidate(false)
       <h2>Get in touch with us</h2>
 
       <Form
-
+    
         countries={countries}
         selectedCountry={selectedCountry}
         validationErrors={validationErrors}
         values={values}
-        setSelectedCountry={selectedCountry}
-        setCountries={setCountries}
-        setValidationErrors={setValidationErrors}
         setValues={setValues}
         handleSubmit={handleSubmit}
         countrySelect={CountrySelect}
@@ -153,22 +157,21 @@ function Form({
   selectedCountry,
   validationErrors,
   values,
-  setCountries,
-  setSelectedCountry,
-  setValidationErrors,
   setValues,
   handleSubmit,
   countrySelect,
-  handleDeleteForm
+  handleDeleteForm,
+
 
 }) {
   return (
     <div>
       <form className="form" onSubmit={handleSubmit}>
         <div className="container">
+
           <div
             className={`label-input-group ${
-              validationErrors.firstName && "error"
+              validationErrors.firstName  && "error"
             }`}
           >
             <label htmlFor="orange">First Name</label>
@@ -176,7 +179,7 @@ function Form({
             <input
               id="orange"
               type="text"
-              name="firstname"
+              name="firstName"
               value={values.firstName}
               onChange={(e) => {
                 setValues((values) => ({
@@ -187,19 +190,24 @@ function Form({
               }}
             />
 
-            {validationErrors.firstName && (
+            {validationErrors.firstName &&  (
               <div className="error-container">
                 <span className="error-msg">{validationErrors.firstName}</span>
               </div>
             )}
           </div>
 
-          <div className="label-input-group">
-            <label htmlFor="banana">Last Name</label>
+
+          <div
+            className={`label-input-group ${
+              validationErrors.lastName  &&  "error"
+            }`}
+          >
+           <label htmlFor="banana">Last Name</label>
             <input
               id="banana"
               type="text"
-              name="lastname"
+              name="lastName"
               value={values.lastName}
               onChange={(e) => {
                 setValues((values) => ({
@@ -209,9 +217,21 @@ function Form({
                 // setValues(e.target.value)
               }}
             />
+              {validationErrors.lastName  && (
+              <div className="error-container">
+                <span className="error-msg">{validationErrors.lastName}</span>
+              </div>
+            )}
           </div>
 
-          <div className="label-input-group">
+
+
+
+          <div
+            className={`label-input-group ${
+              validationErrors.birth  &&  "error"
+            }`}
+          >
             <label htmlFor="apple">Date of Birth</label>
             <input
               id="apple"
@@ -225,15 +245,26 @@ function Form({
                 }));
               }}
             />
+              {validationErrors.birth &&  (
+              <div className="error-container">
+                <span className="error-msg">{validationErrors.birth}</span>
+              </div>
+            )}
           </div>
 
-          <div className="label-input-group " id="gender">
+
+
+
+          <div
+          className="label-input-group"
+            id="gender"
+          >
             <label>Gender</label>
             <label htmlFor="milk">
               <input
                 id="milk"
                 type="radio"
-                name="radio"
+                name="female"
                 value={"Female"}
                 // checked = {selectedGender === "Female"}
                 checked={values.selectedGender === "Female"}
@@ -251,7 +282,7 @@ function Form({
               <input
                 id="kiwi"
                 type="radio"
-                name="radioo"
+                name="male"
                 value={"Male"}
                 checked={values.selectedGender === "Male"}
                 onChange={(e) => {
@@ -263,14 +294,20 @@ function Form({
               />
               Male
             </label>
-          </div>
 
-          <div className="label-input-group">
+         
+</div>
+
+         
+         
+          <div
+           className="label-input-group"
+          >
             <label htmlFor="lemon">Mobile Number</label>
             <input
               id="lemon"
               type="text"
-              name="mobilenumber"
+              name="mobileNumber"
               value={values.mobileNumber}
               onChange={(e) => {
                 setValues((values) => ({
@@ -282,7 +319,12 @@ function Form({
             />
           </div>
 
-          <div className="label-input-group">
+
+          <div
+            className={`label-input-group ${
+              validationErrors.email  &&  "error"
+            }`}
+          >
             <label htmlFor="melon">Email</label>
             <input
               id="melon"
@@ -296,9 +338,21 @@ function Form({
                 }));
               }}
             />
-          </div>
 
-          <div className="label-input-group">
+{validationErrors.email &&  (
+              <div className="error-container">
+                <span className="error-msg">{validationErrors.email}</span>
+              </div>
+            )}
+</div>
+
+
+
+          <div
+            className={`label-input-group ${
+              validationErrors.password  &&  "error"
+            }`}
+          >
             <label htmlFor="cherry">Password</label>
             <input
               id="cherry"
@@ -312,14 +366,27 @@ function Form({
                 }));
               }}
             />
-          </div>
+   {validationErrors.password &&  (
+              <div className="error-container">
+                <span className="error-msg">{validationErrors.password}</span>
+              </div>
+            )}
+</div>
 
-          <div className="label-input-group" id="checkbox">
+
+<div
+            className={`label-input-group ${
+              validationErrors.selectedProducts  &&  "error"
+            }`}
+id="checkbox"
+          >
             <label>Your Product</label>
 
             <label>
               <input
-                type="checkbox"
+              name="XPad"
+                type
+                ="checkbox"
                 // checked = {hobbies.football}
                 // onChange={() => setHobbies({ ...hobbies, football: !hobbies.football })}
                 value={"XPad"}
@@ -336,6 +403,7 @@ function Form({
 
             <label>
               <input
+              name="XPadPro"
                 type="checkbox"
                 value={"XPad Pro"}
                 // checked = {selectedHobbies === "Basketball"}
@@ -351,11 +419,21 @@ function Form({
               />
               XPad Pro
             </label>
+            {validationErrors.selectedProducts &&  (
+              <div className="error-container">
+                <span className="error-msg">{validationErrors.selectedProduct}</span>
+              </div>
+            )}
           </div>
-
-          <div className="label-input-group">
+        
+        
+          <div
+            className={`label-input-group ${
+              validationErrors.selectedCountry  && "error"
+            }`}
+          >
             <label htmlFor="plum">Country</label>
-            <div className="countrySelect">
+            <div className="countrySelect" name="country">
               {countrySelect({
                 countries,
                 selectedCountry,
@@ -363,11 +441,22 @@ function Form({
                 setValues,
               })}
             </div>
+            {validationErrors.selectedCountry &&  (
+              <div className="error-container">
+                <span className="error-msg">{validationErrors.selectedCountry}</span>
+              </div>
+            )}
           </div>
 
-          <div className="label-input-group">
+
+          <div
+            className={`label-input-group ${
+              validationErrors.feedback  &&  "error"
+            }`}
+          >
             <label htmlFor="pear">Product Feedback</label>
             <textarea
+            name="feedback"
               placeholder="Your comment..."
               id="pear"
               value={values.feedback}
@@ -378,6 +467,11 @@ function Form({
                 }));
               }}
             />
+             {validationErrors.feedback &&  (
+              <div className="error-container">
+                <span className="error-msg">{validationErrors.feedback}</span>
+              </div>
+            )}
           </div>
 
           <div className="btn-container">
