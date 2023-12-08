@@ -54,8 +54,8 @@ export default function App() {
     lastName: yup.string().required("LastName is required"),
     email: yup.string().email().required("Email is required"),
     password: yup.string().required("Password is Required"),
-    birth: yup.date().required("Birth date is required"),
-    selectedCountry:yup.object().required("Country is required"),
+    birth: yup.string().required("Birth date is required"),
+    selectedCountry:yup.object(),
     feedback: yup.string().required("Feedback is required"),
     selectedProducts: yup.array().min(1, "Select at least one product").required(),
             // .matches(
@@ -99,8 +99,6 @@ setValidationErrors(errors)
 
 
    function handleDeleteForm () {
-
-
 
 setValues({ firstName: "",
 lastName: "",
@@ -380,10 +378,13 @@ function Form({
             }`}
 id="checkbox"
           >
-            <label>Your Product</label>
+            <label >Your Product</label>
 
-            <label>
+          
+
+            <label className="product" >
               <input
+              
               name="XPad"
                 type
                 ="checkbox"
@@ -401,8 +402,11 @@ id="checkbox"
               XPad
             </label>
 
-            <label>
+          
+          
+            <label className="product" >
               <input
+              
               name="XPadPro"
                 type="checkbox"
                 value={"XPad Pro"}
@@ -421,9 +425,11 @@ id="checkbox"
             </label>
             {validationErrors.selectedProducts &&  (
               <div className="error-container">
-                <span className="error-msg">{validationErrors.selectedProduct}</span>
+                <span className="error-msg">{validationErrors.selectedProducts}</span>
               </div>
             )}
+
+
           </div>
         
         

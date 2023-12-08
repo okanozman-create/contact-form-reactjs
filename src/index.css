@@ -63,7 +63,7 @@ textarea {
 .countrySelect:focus {  outline: 2px solid #d71ef7;}
 .countrySelect{
   box-shadow: none;
-
+display: inline;
   flex: 1; /* Take up remaining space */
   padding: 0.4rem;
   font-size: 1.8rem;
@@ -266,6 +266,9 @@ input[type="radio"]:focus {
   color: #cc0033;
   font-weight: bold;
 }
+
+
+
 
 .error.label-input-group input {
   border: 2px solid #cc0033;
