@@ -6,6 +6,7 @@ import Select from "react-select";
 
 
 
+
 export default function App() {
   
   const [countries, setCountries] = useState([]);
@@ -57,7 +58,7 @@ export default function App() {
     birth: yup.string().required("Birth date is required"),
     selectedCountry:yup.object(),
     feedback: yup.string().required("Feedback is required"),
-    selectedProducts: yup.array().min(1, "Select at least one product").required(),
+    selectedProducts: yup.array().min(1, "Select at least one product"),
             // .matches(
     //    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
     //    "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
@@ -81,6 +82,27 @@ export default function App() {
       });
       console.log("Validation successful:", validatedData);
       console.log("Form submitted");
+
+
+      const response = await fetch("https://epqxgnoita.execute-api.eu-north-1.amazonaws.com/newnewstage/contact-form", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          // Add any additional headers if required
+        },
+        body: JSON.stringify(validatedData),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log('Server response:', responseData);
+        // Do something with the server response if needed
+      } else {
+        console.error('Failed to submit form data:', response.statusText);
+        // Handle the error appropriately (e.g., show an error message to the user)
+      }
+  
+
 
       // Do something with validatedData, e.g., send it to the server
       // ...
