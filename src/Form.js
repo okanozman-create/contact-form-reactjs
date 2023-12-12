@@ -282,12 +282,13 @@ export default  function Form({
               }`}
             >
               <label htmlFor="plum">Country</label>
-              <div className="countrySelect" name="country">
+              <div className="countrySelect"  name="country">
                 {countrySelect({
                   countries,
                   selectedCountry,
                   values,
                   setValues,
+                
                 })}
               </div>
               {validationErrors.selectedCountry &&  (
@@ -324,8 +325,8 @@ export default  function Form({
             </div>
   
             <div className="btn-container">
-              <button className="submit" >Submit</button>
-              <button className="reset"  onClick={handleDeleteForm}>Undo</button>
+              <button className="submit" type="submit" >Submit</button>
+              <button className="reset"  type="reset"   onClick={handleDeleteForm}>Undo</button>
             </div>
           </div>
         </form>

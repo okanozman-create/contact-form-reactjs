@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+*:focus {
+  outline: 2px solid #d71ef7;
+ }
+
 html {
   font-size: 62.5%;
 }
@@ -14,72 +18,10 @@ body {
   line-height: 1;
   color: #adb5bd;
   background: linear-gradient(135deg, #92effd 60%, #4e65ff);
-  /* height: 100vh;   */
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-.container {
-  max-width: 100%;
-  margin: 3.2rem auto;
-  padding: 1.6rem;
-  /* display: flex;
-  flex-direction: column;
-  gap: 1.2rem; */
-}
-
-.label-input-group {
-  display: flex;
-  gap: 1.6rem;
-  align-items: center;
-  margin-bottom: 1.2rem;
-}
-
-label {
-  color: black;
-  font-weight: 700;
-  font-size: 2.4rem;
-  /* Fixed width for labels */
-}
-
-input,
-textarea {
-  flex: 1; /* Take up remaining space */
-  padding: 0.4rem;
-  font-size: 1.8rem;
-  /* box-shadow: 3px 3px 5px grey; */
-  box-shadow:
-    inset 10px 10px 20px #e0e0e0,
-    inset -10px -10px 20px #ffffff;
-}
-
-/* #react-select-3-input{
-
-  color:transparent !important;
-  display:none
- 
-} */
-.countrySelect:focus {  outline: 2px solid #d71ef7;}
-.countrySelect{
-  box-shadow: none;
-display: inline;
-  flex: 1; /* Take up remaining space */
-  padding: 0.4rem;
-  font-size: 1.8rem;
-  border: none;
-}
-
-input {
-  border-radius: 9px;
-  /* box-shadow:0 0 15px 4px rgba(0,0,0,0.06); */
-  /* font-family: inherit; */
-  border: none;
-}
-
-/* input[type=text]:focus,input[type=password]:focus,textarea:focus,input[type=date]:focus,input[type=email]:focus,select:focus{
-  outline: 2px solid #d71ef7
-} */
 
 h1 {
   text-align: center;
@@ -92,6 +34,8 @@ h1 {
   font-family: "Russo One";
 }
 
+
+
 h2 {
   text-align: center;
   font-size: 3rem;
@@ -99,53 +43,112 @@ h2 {
   font-weight: 600;
 }
 
+
+
+.container {
+  max-width: 100%;
+  margin: 3.2rem 2.4rem;
+  padding: 1.6rem;
+}
+
+
+
+.label-input-group {
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+label {
+  color:#343a40;
+  font-weight: 700;
+  font-size: 2.4rem;
+  font-family:   "Rubik Bubles" ;
+
+}
+
+input,
+textarea {
+  flex: 1; 
+  padding: 0.4rem;
+  font-size: 1.8rem;
+ 
+  box-shadow:
+    inset 10px 10px 20px #e0e0e0,
+    inset -10px -10px 20px #ffffff;
+}
+
+
+
 textarea {
   resize: none;
   padding: 0.8rem;
   max-width: 100%;
 }
 
-/* input[type="radio"]{
-  margin-right: 2rem;
-  appearance: none;
-  width: 1.2rem;
-  height: 1.2rem;
-  outline: 2px solid crimson;
-  outline-offset: 2px;
-  border-radius: 50%;
+
+input {
+  border-radius: 9px;
+  border: none;
 }
-input[type="radio"]:checked {
-  background: red;
+
+
+/* .css-13cymwt-control{
+  border-color: #d71ef7 !important;
+  border: none !important;
 } */
 
-input[type="radio"],
-input[type="checkbox"] {
+
+.countrySelect{
+
+  display: inline; 
+  flex: 1; 
+  padding: 0.4rem;
+  font-size: 1.8rem;
+
+  color:#A61E4D;
+}
+
+input[type="radio"]{
   width: 3rem;
   height: 3rem;
   accent-color: green;
-  /* outline: none; */
-  box-shadow: none;
+  box-shadow: none; 
 }
+
 
 input[type="radio"]:focus {
-  /* box-shadow: 0 0 3pt 2pt cornflowerblue; */
-  /* box-shadow: 0 0 0 1pt grey; */
-  /* box-shadow: 0px 0px 0px 1px #fff inset; */
-  outline: none;
+ outline: 3px ridge  #d71ef7 ;
+  }
 
-  box-shadow: 0 0 0 1px hsla(220, 100%, 50%, 80%);
-}
+
+
+  input[type="checkbox"] {
+    width: 3rem;
+    height: 3rem;
+    accent-color: green;
+    box-shadow: none;
+  }
+  
+ input[type="checkbox"]:focus{
+  outline: 4px ridge  #d71ef7 ;
+  }
+
+
 
 #gender {
   display: flex;
-  gap: 3.2rem;
+  gap: 5.2rem;
   align-items: center;
+
 }
 
 #gender label {
   display: flex;
   align-items: center;
-  gap: 1.2rem; /* Adjust margin as needed */
+  gap: 1.2rem; 
+  
 }
 
 #checkbox {
@@ -157,12 +160,18 @@ input[type="radio"]:focus {
 #checkbox label {
   display: flex;
   align-items: center;
-  gap: 1.2rem; /* Adjust margin as needed */
+  gap: 1.2rem; 
 }
+
+
+
+
+
+
 
 .btn-container {
   margin-top: 2.4rem;
-  display: flex;
+   display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
@@ -214,13 +223,10 @@ input[type="radio"]:focus {
   border-color: #ffffff;
 }
 
-*:focus {
-  /* outline: none; */
-  /* outline: 4px dotted #e67e22; */
-  /* outline-offset: 8px; */
-  /* box-shadow: 0 0 0 0.8rem rgba(230, 125, 34, 0.5); */
-  outline: 2px solid #d71ef7;
-}
+
+
+/* ERROR MSG */
+
 
 .error-msg {
   color: #cc0033;

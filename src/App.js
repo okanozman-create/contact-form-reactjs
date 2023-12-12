@@ -7,31 +7,27 @@ import Form from "./Form";
 
 
 
+const initialData = { 
+firstName: "",
+lastName: "",
+email: "",
+mobileNumber: "",
+birth: "",
+password: "",
+selectedProduct: "",
+selectedGender: "",
+feedback: "",}
+
+const initalValueCountry = { value: '', label: '---Choose Country---'}
+
+
 
 export default function App() {
   
   const [countries, setCountries] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState(  {value: '', label: '---Choose Country---'}); 
-
-
-
-
+  const [selectedCountry, setSelectedCountry] = useState(initalValueCountry); 
   const [validationErrors, setValidationErrors] = useState({});
- 
-  const [values, setValues] = useState({ 
-  firstName: "",
-  lastName: "",
-  email: "",
-  mobileNumber: "",
-  birth: "",
-  password: "",
-  selectedProduct: "",
-  selectedGender: "",
-  feedback: "",});
-
-
-
-
+  const [values, setValues] = useState(initialData) 
 
   const userSchema = yup.object().shape({
     firstName: yup.string().required("FirstName is required"),
@@ -47,6 +43,7 @@ export default function App() {
 });
 
 
+
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -55,11 +52,21 @@ export default function App() {
   
 
     try {
-      const validatedData = await userSchema.validate(formData,  {
+      
+      const isInitialData = Object.keys(initialData).every(
+        key => formData[key] === initialData[key]
+      );
+    
+      if (isInitialData)  return;
+
+
+
+   
+    const validatedData = await userSchema.validate(formData,  {
         abortEarly: false,
       });
       console.log("Validation successful:", validatedData);
-      console.log("Form submitted");
+  
 
 
       const response = await fetch("https://epqxgnoita.execute-api.eu-north-1.amazonaws.com/newnewstage/contact-form", {
@@ -86,8 +93,9 @@ export default function App() {
       error.inner.forEach((err) => {
         errors[err.path] = err.message;
       });
-  console.error("Error:", errors)
+   console.error("Error:", errors)
 setValidationErrors(errors)
+
     }
 
   }
@@ -96,21 +104,11 @@ setValidationErrors(errors)
 
 function handleDeleteForm () {
 
-setValues({ firstName: "",
-lastName: "",
-email: "",
-mobileNumber: "",
-birth: "",
-password: "",
-selectedProduct: "",
-selectedGender: "",
-feedback: "",});
+setValues(initialData);
 
-setSelectedCountry( 
-  {value: '', label: '---Choose Country---'});
+setSelectedCountry(initalValueCountry);
 
-
-  setTimeout(() => {
+ setTimeout(() => {
     setValidationErrors({});
   }, 0)
 
@@ -120,39 +118,27 @@ setSelectedCountry(
 const CountrySelect = () => {
 
 
-  // useEffect(() => {
-  // async function fetchData()  {
-  //     try {
-  //       const response = await fetch(
-  //         "https://valid.layercode.workers.dev/list/countries?format=select&flags=true&value=code"
-  //       );
-  //       const data = await response.json();
+   useEffect(() => {
+   async function fetchData()  {
+       try {
+         const response = await fetch(
+           "https://valid.layercode.workers.dev/list/countries?format=select&flags=true&value=code"
+       );
+         const data = await response.json();
 
-  //       setCountries(data.countries);
-  //       setSelectedCountry({ value: '', label: '---Choose Country---' });
-  //     } catch (error) {
-  //       console.error("Error fetching country data:", error);
-  //     }
-  //   };
+         setCountries(data.countries);
+         setSelectedCountry(initalValueCountry);
+       } catch (error) {
+         console.error("Error fetching country data:", error);
+       }
+     };
 
-  //   fetchData();
-  // }, []);
-
-
-useEffect(() => {
-     fetch(
-      "https://valid.layercode.workers.dev/list/countries?format=select&flags=true&value=code",
-   )
-      .then((response) => response.json())
-      .then((data) => {
-setCountries(data.countries);
-    setSelectedCountry({value: '', label: '---Choose Country---'});
-      
-       });
+     fetchData();
    }, []);
 
 
-  return (
+
+return (
     <Select
       options={countries}
       value= {selectedCountry} 
