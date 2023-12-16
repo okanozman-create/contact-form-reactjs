@@ -78,7 +78,7 @@ export default function App() {
 
       if (response.ok) {
         const responseData = await response.json();
-    
+   
         console.log('Server response:', responseData);
       
       } else {
@@ -88,6 +88,10 @@ export default function App() {
   
       setValues(initialData);
       setSelectedCountry(initalValueCountry);
+      setTimeout(() => {
+        setValidationErrors({});
+      }, 0)
+    
 
 
     
