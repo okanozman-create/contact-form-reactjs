@@ -80,6 +80,7 @@ export default function App() {
 
       if (response.ok) {
         const responseData = await response.json();
+        {<DisplaySuccessMsg/>}
         console.log('Server response:', responseData);
       
       } else {
@@ -88,8 +89,7 @@ export default function App() {
       }
   
       setValues(initialData);
-
-       setSelectedCountry(initalValueCountry);
+      setSelectedCountry(initalValueCountry);
 
 
     
@@ -118,7 +118,12 @@ setSelectedCountry(initalValueCountry);
   }, 0)
 
 }
+function DisplaySuccessMsg () {
 
+return    <h1>Success</h1>
+
+
+}
 
 const CountrySelect = () => {
 
