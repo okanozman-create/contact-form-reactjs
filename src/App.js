@@ -65,9 +65,10 @@ export default function App() {
     const validatedData = await userSchema.validate(formData,  {
         abortEarly: false,
       });
-      console.log("Validation successful:", validatedData);
+      // console.log("Validation successful:", validatedData);
   
 
+    
 
       const response = await fetch("https://epqxgnoita.execute-api.eu-north-1.amazonaws.com/newnewstage/contact-form", {
         method: 'POST',
@@ -86,6 +87,10 @@ export default function App() {
         
       }
   
+      setValues(initialData);
+
+       setSelectedCountry(initalValueCountry);
+
 
     
     } catch (error) {
