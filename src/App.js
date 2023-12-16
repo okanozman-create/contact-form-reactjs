@@ -88,9 +88,9 @@ export default function App() {
   
       setValues(initialData);
       setSelectedCountry(initalValueCountry);
-      setTimeout(() => {
+
         setValidationErrors({});
-      }, 0)
+
     
 
 
