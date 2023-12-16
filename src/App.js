@@ -80,7 +80,7 @@ export default function App() {
 
       if (response.ok) {
         const responseData = await response.json();
-        {<DisplaySuccessMsg/>}
+        <DisplaySuccessMsg/>
         console.log('Server response:', responseData);
       
       } else {
