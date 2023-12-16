@@ -5,8 +5,6 @@ import Form from "./Form";
 
 
 
-
-
 const initialData = { 
 firstName: "",
 lastName: "",
@@ -48,7 +46,7 @@ export default function App() {
     e.preventDefault();
 
     const formData = { ...values,selectedCountry };
-    console.log(formData);
+    // console.log(formData);
   
 
     try {
@@ -80,7 +78,7 @@ export default function App() {
 
       if (response.ok) {
         const responseData = await response.json();
-        <DisplaySuccessMsg/>
+    
         console.log('Server response:', responseData);
       
       } else {
@@ -98,7 +96,7 @@ export default function App() {
       error.inner.forEach((err) => {
         errors[err.path] = err.message;
       });
-   console.error("Error:", errors)
+  //  console.error("Error:", errors)
 setValidationErrors(errors)
 
     }
@@ -118,12 +116,7 @@ setSelectedCountry(initalValueCountry);
   }, 0)
 
 }
-function DisplaySuccessMsg () {
 
-return    <h1>Success</h1>
-
-
-}
 
 const CountrySelect = () => {
 
@@ -139,7 +132,7 @@ const CountrySelect = () => {
          setCountries(data.countries);
          setSelectedCountry(initalValueCountry);
        } catch (error) {
-         console.error("Error fetching country data:", error);
+        //  console.error("Error fetching country data:", error);
        }
      };
 
@@ -159,7 +152,8 @@ return (
 
 
   return (
-    <div className="App">
+
+<div className="App">
       <h1>Contact Form</h1>
       <h2>Get in touch with us</h2>
 
