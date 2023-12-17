@@ -26,6 +26,7 @@ export default function App() {
   const [selectedCountry, setSelectedCountry] = useState(initalValueCountry); 
   const [validationErrors, setValidationErrors] = useState({});
   const [values, setValues] = useState(initialData) 
+  const [successSubmit, setSuccessSubmit] = useState(false) 
 
   const userSchema = yup.object().shape({
     firstName: yup.string().required("FirstName is required"),
@@ -46,66 +47,75 @@ export default function App() {
     e.preventDefault();
 
     const formData = { ...values,selectedCountry };
-    // console.log(formData);
+    //  console.log(formData);
   
-
-    try {
+     
+try {
       
       const isInitialData = Object.keys(initialData).every(
-        key => formData[key] === initialData[key]
-      );
+         key => formData[key] === initialData[key]
+       );
     
-      if (isInitialData)  return;
+       if (isInitialData)  return;
 
 
 
    
     const validatedData = await userSchema.validate(formData,  {
-        abortEarly: false,
+         abortEarly: false,
       });
-      // console.log("Validation successful:", validatedData);
+      //  console.log("Validation successful:", validatedData);
   
 
-    
-
-      const response = await fetch("https://epqxgnoita.execute-api.eu-north-1.amazonaws.com/newnewstage/contact-form", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-         },
-        body: JSON.stringify(validatedData),
-      });
+  
+       const response = await fetch("https://epqxgnoita.execute-api.eu-north-1.amazonaws.com/newnewstage/contact-form", {
+         method: 'POST',
+    headers: {
+          'Content-Type': 'application/json',          },
+         body: JSON.stringify(validatedData),
+       });
 
       if (response.ok) {
-        const responseData = await response.json();
+         const responseData = await response.json();
+         console.log('Server response:', responseData);
+           
+
    
-        console.log('Server response:', responseData);
+
       
-      } else {
-        console.error('Failed to submit form data:', response.statusText);
+       } else {
+         console.error('Failed to submit form data:', response.statusText);
         
-      }
-  
-      setValues(initialData);
-      setSelectedCountry(initalValueCountry);
+       }
 
-        setValidationErrors({});
-
+       setValues(initialData);
+       setSelectedCountry(initalValueCountry);
+       setValidationErrors({});      
+       setSuccessSubmit(SuccessSubmit)
+       setSuccessSubmit(true)
     
 
 
     
-    } catch (error) {
-      const errors = {};
-      error.inner.forEach((err) => {
-        errors[err.path] = err.message;
+     } catch (error) {
+       const errors = {};
+       error.inner.forEach((err) => {
+          errors[err.path] = err.message;
       });
-  //  console.error("Error:", errors)
-setValidationErrors(errors)
+   console.error("Error:", errors)
+  setValidationErrors(errors)
 
-    }
+     }
 
-  }
+   
+}
+
+
+function backToForm () {
+  setSuccessSubmit(false)
+  setValues(initialData);
+  setValidationErrors({})
+}
 
 
 
@@ -155,12 +165,29 @@ return (
 };
 
 
+function SuccessSubmit () {
+
+
   return (
+<div className="success-container">
+      <h1 className="ss-h1">Success Submit  🚀🚀🚀</h1>
+     <h2 className="ss-h2">Thank you for your feedback.</h2>
+     <button className="btn-successsubmit"  onClick={backToForm}>Back To Form </button>
+   </div>
 
-<div className="App">
+  );
+}
+
+
+
+  return (
+    successSubmit ? <SuccessSubmit/> :
+     <div className="App">
       <h1>Contact Form</h1>
+      <h3>Is there any issue with your product?</h3>
+      <h4>Please proceed to submit the <span>form</span> 📃📃📃</h4>
       <h2>Get in touch with us</h2>
-
+    
       <Form
     
         countries={countries}
