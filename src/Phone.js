@@ -33,8 +33,7 @@ const Phone = ({ values, setValues }) => {
           inputProps={{
             id: 'lemon',
             name: 'mobileNumber',
-            required: true,
-            autoFocus: true,
+          
           }}
           country={'tr'}
           value={mobileNumber}
