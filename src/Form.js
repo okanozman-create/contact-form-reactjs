@@ -1,3 +1,4 @@
+import Phone from "./Phone";
 export default  function Form({
     countries,
     selectedCountry,
@@ -7,8 +8,7 @@ export default  function Form({
     handleSubmit,
     countrySelect,
     handleDeleteForm,
-  
-  
+   
   }) {
     return (
       <div>
@@ -139,17 +139,15 @@ export default  function Form({
                 />
                 Male
               </label>
+   </div>
   
            
-  </div>
-  
            
-           
-            <div
+            {/* <div
              className="label-input-group"
             >
               <label htmlFor="lemon">Mobile Number</label>
-              <input
+              { <input
                 id="lemon"
                 type="text"
                 name="mobileNumber"
@@ -160,10 +158,11 @@ export default  function Form({
                     mobileNumber: e.target.value,
                   }));
                    }}
-              />
+              /> }
             </div>
-  
-  
+   */}
+   
+   <Phone values={values} setValues={setValues} />
           
           
             <div

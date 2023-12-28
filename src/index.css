@@ -21,6 +21,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+ 
 }
 
 h1 {
@@ -77,8 +78,9 @@ h4 span {
   font-weight: 700;
 }
 
-.container {
-  max-width: 100%;
+.form {
+  /* max-width: 100%; */
+  max-width: 120rem;
   margin: 3.2rem 2.4rem;
   padding: 1.6rem;
 }
@@ -170,7 +172,16 @@ input[type="radio"]:focus {
   outline: 4px ridge  #d71ef7 ;
   }
 
+.phone {
+  display: inline;
+  flex: 1;
+  padding: 0.4rem;
+ 
+}
 
+.phone:focus{
+  outline: 4px ridge  #d71ef7 ;
+}
 
 #gender {
   display: flex;
@@ -365,3 +376,41 @@ margin-top: 3rem;
 .error.label-input-group .error-container {
   display: inline;
 }
+
+
+
+
+
+  /* @media (max-width: 44em) {
+    .form{
+      max-width: 100rem;
+      background-color:#A61E4D;
+    }
+    }   */
+
+
+         
+      @media (max-width: 29em) {
+        .form{
+          max-width: 100%;
+          /* background-color:blue; */
+          margin-right: 0;
+          background-color: yellow;
+        }
+
+            label {
+  font-size: 1.4rem; } 
+               
+}
+      
+
+      
+
+@media (max-width: 20em) {
+       
+          label {
+    font-size: 1.2rem;
+  }
+  
+          }
+        

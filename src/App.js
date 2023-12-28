@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import * as yup from "yup";
 import Select from "react-select";
 import Form from "./Form";
+import 'react-phone-input-2/lib/style.css';
+
+
 
 
 
@@ -9,7 +12,7 @@ const initialData = {
 firstName: "",
 lastName: "",
 email: "",
-mobileNumber: "",
+ mobileNumber: "",
 birth: "",
 password: "",
 selectedProduct: "",
@@ -32,7 +35,7 @@ export default function App() {
     firstName: yup.string().required("FirstName is required"),
     lastName: yup.string().required("LastName is required"),
     email: yup.string().email().required("Email is required"),
-    password: yup.string().required("Password is Required"),
+    password: yup.string().required("Password is Required").min(6, "Password must have at least 6 characters"),
     birth: yup.string().required("Birth date is required"),
     selectedCountry:yup.object(),
     feedback: yup.string().required("Feedback is required"),
@@ -47,7 +50,7 @@ export default function App() {
     e.preventDefault();
 
     const formData = { ...values,selectedCountry };
-    //  console.log(formData);
+      console.log(formData);
   
      
 try {
@@ -71,7 +74,7 @@ try {
        const response = await fetch("https://epqxgnoita.execute-api.eu-north-1.amazonaws.com/newnewstage/contact-form", {
          method: 'POST',
     headers: {
-          'Content-Type': 'application/json',          },
+          'Content-Type': 'application/json', },
          body: JSON.stringify(validatedData),
        });
 
@@ -91,8 +94,8 @@ try {
        setValues(initialData);
        setSelectedCountry(initalValueCountry);
        setValidationErrors({});      
-       setSuccessSubmit(SuccessSubmit)
-       setSuccessSubmit(true)
+       setSuccessSubmit(SuccessSubmit);
+       setSuccessSubmit(true);  
     
 
 
@@ -102,7 +105,7 @@ try {
        error.inner.forEach((err) => {
           errors[err.path] = err.message;
       });
-   console.error("Error:", errors)
+  //  console.error("Error:", errors)
   setValidationErrors(errors)
 
      }
@@ -155,6 +158,12 @@ const CountrySelect = () => {
 
 
 
+  
+
+
+
+
+
 return (
     <Select
       options={countries}
@@ -198,6 +207,8 @@ function SuccessSubmit () {
         handleSubmit={handleSubmit}
         countrySelect={CountrySelect}
         handleDeleteForm={handleDeleteForm}
+       
+      
       />
     </div>
   );
