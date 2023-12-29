@@ -3,27 +3,18 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 
 const Phone = ({ values, setValues }) => {
-  const [mobileNumber, setMobileNumber] = useState('');
+   
 
-  const localHandlePhoneChange = (phone) => {
-    setMobileNumber(phone);
 
-    if (setValues) {
-      setValues((prevValues) => ({
-        ...prevValues,
-        mobileNumber: phone,
-      }));
-    }
+
+  const handlePhoneChange = (phone) => {
+    setValues((prevValues) => ({
+      ...prevValues,
+      mobileNumber: phone,
+    }));
   };
 
-  useEffect(() => {
-    if (setValues) {
-      setValues((prevValues) => ({
-        ...prevValues,
-        mobileNumber: mobileNumber,
-      }));
-    }
-  }, [mobileNumber, setValues]);
+ 
 
   return (
     <div className="label-input-group">
@@ -36,8 +27,8 @@ const Phone = ({ values, setValues }) => {
           
           }}
           country={'tr'}
-          value={mobileNumber}
-          onChange={localHandlePhoneChange}
+          value={values.mobileNumber}
+          onChange={handlePhoneChange}
         />
       </div>
     </div>
