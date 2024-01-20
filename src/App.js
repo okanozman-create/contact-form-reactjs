@@ -60,7 +60,7 @@ export default function App() {
       //  console.log("Validation successful:", validatedData);
 
       const response = await fetch(
-        "https://epqxgnoita.execute-api.eu-north-1.amazonaws.com/newnewstage/contact-form",
+        "https://epqxgnoita.execute-api.eu-north-1.amazonaws.com",
         {
           method: "POST",
           headers: {
