@@ -60,7 +60,7 @@ export default function App() {
       //  console.log("Validation successful:", validatedData);
 
       const response = await fetch(
-        "https://kufhnbgos4.execute-api.eu-north-1.amazonaws.com/Prod",
+        "https://kufhnbgos4.execute-api.eu-north-1.amazonaws.com/Prod2",
         {
           method: "POST",
           headers: {
