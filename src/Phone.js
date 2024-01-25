@@ -1,12 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const Phone = ({ values, setValues }) => {
-   
-
-
-
   const handlePhoneChange = (phone) => {
     setValues((prevValues) => ({
       ...prevValues,
@@ -14,19 +9,16 @@ const Phone = ({ values, setValues }) => {
     }));
   };
 
- 
-
   return (
     <div className="label-input-group">
       <label htmlFor="lemon">Mobile Number</label>
       <div className="phone">
         <PhoneInput
           inputProps={{
-            id: 'lemon',
-            name: 'mobileNumber',
-          
+            id: "lemon",
+            name: "mobileNumber",
           }}
-          country={'tr'}
+          country={"tr"}
           value={values.mobileNumber}
           onChange={handlePhoneChange}
         />

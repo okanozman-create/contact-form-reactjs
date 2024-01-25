@@ -41,26 +41,106 @@ export default function App() {
     selectedGender: yup.string(),
   });
 
+  // async function handleSubmit(e) {
+  //   e.preventDefault();
+
+  //   const formData = { ...values, selectedCountry };
+  //   // console.log(formData);
+
+  //   try {
+  //     const isInitialData = Object.keys(initialData).every(
+  //       (key) => formData[key] === initialData[key]
+  //     );
+
+  //     if (isInitialData) return;
+
+  //     const validatedData = await userSchema.validate(formData, {
+  //       abortEarly: false,
+  //     });
+  //     //  console.log("Validation successful:", validatedData);
+
+  //     const response = await fetch(
+  //       "https://epqxgnoita.execute-api.eu-north-1.amazonaws.com",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(validatedData),
+  //       }
+  //     );
+
+  //     if (response.ok) {
+  //       const responseData = await response.json();
+  //       console.log("Server response:", responseData);
+  //     } else {
+  //       console.error("Failed to submit form data:", response.statusText);
+  //     }
+
+  //     setValues(initialData);
+  //     setSelectedCountry(initalValueCountry);
+  //     setValidationErrors({});
+  //     setSuccessSubmit(SuccessSubmit);
+  //     setSuccessSubmit(true);
+  //   } catch (error) {
+  //     const errors = {};
+  //     error.inner.forEach((err) => {
+  //       errors[err.path] = err.message;
+  //     });
+  //     //  console.error("Error:", errors)
+  //     setValidationErrors(errors);
+  //   }
+  // }
+
   async function handleSubmit(e) {
     e.preventDefault();
 
     const formData = { ...values, selectedCountry };
-    // console.log(formData);
 
     try {
+      // Check if the form data is the same as the initial data
       const isInitialData = Object.keys(initialData).every(
         (key) => formData[key] === initialData[key]
       );
 
-      if (isInitialData) return;
+      if (isInitialData) {
+        return; // Exit if no changes were made in the form
+      }
 
+      // Validate form data
       const validatedData = await userSchema.validate(formData, {
         abortEarly: false,
       });
-      //  console.log("Validation successful:", validatedData);
 
+      // Send the validated data to the API
+      const responseData = await postData(validatedData);
+      console.log("Server response:", responseData);
+
+      // Reset form and state after successful submission
+      setValues(initialData);
+      setSelectedCountry(initalValueCountry); // Assuming this is the correct variable name
+      setValidationErrors({});
+      setSuccessSubmit(true);
+    } catch (error) {
+      // Handle validation errors
+      if (error.inner) {
+        const errors = {};
+        error.inner.forEach((err) => {
+          errors[err.path] = err.message;
+        });
+        setValidationErrors(errors);
+      } else {
+        // Handle other types of errors (like network/API errors)
+        console.error("Error:", error);
+        // Additional error handling can go here
+      }
+    }
+  }
+
+  async function postData(validatedData) {
+    try {
       const response = await fetch(
-        "https://epqxgnoita.execute-api.eu-north-1.amazonaws.com",
+        "https://kufhnbgos4.execute-api.eu-north-1.amazonaws.com/Prod2",
         {
           method: "POST",
           headers: {
@@ -70,25 +150,14 @@ export default function App() {
         }
       );
 
-      if (response.ok) {
-        const responseData = await response.json();
-        console.log("Server response:", responseData);
-      } else {
-        console.error("Failed to submit form data:", response.statusText);
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      setValues(initialData);
-      setSelectedCountry(initalValueCountry);
-      setValidationErrors({});
-      setSuccessSubmit(SuccessSubmit);
-      setSuccessSubmit(true);
+      return await response.json();
     } catch (error) {
-      const errors = {};
-      error.inner.forEach((err) => {
-        errors[err.path] = err.message;
-      });
-      //  console.error("Error:", errors)
-      setValidationErrors(errors);
+      console.error("There was an error!", error);
+      throw error; // Re-throw the error to be caught in handleSubmit
     }
   }
 
