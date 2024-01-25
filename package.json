@@ -8,7 +8,11 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+<<<<<<< HEAD
     "aws-sdk": "^2.1543.0",
+=======
+    "aws-sdk": "^2.1540.0",
+>>>>>>> 5b69c35664a59c8f65c2ee7163f4e07e74bb8161
     "babel-preset-react-app": "^10.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
