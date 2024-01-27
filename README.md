@@ -2,7 +2,7 @@ React Form Application with AWS Integration
 
 -----Project Overview----
 
-This project showcases a React-based form application, designed to collect and process user feedback on two products. It exemplifies the integration of React with AWS services, demonstrating a seamless blend of frontend development and serverless backend architecture.
+This React-based form application is designed to collect and process user feedback on two products, showcasing a robust integration of frontend and serverless backend technologies. Utilizing React for its dynamic user interface and AWS services for backend processes, the application stands out for its efficient handling of user inputs and secure data processing. It incorporates stylish CSS styling for a responsive design, ensuring a seamless and adaptive user experience across various devices, including desktops, tablets, and smartphones. This blend of technologies guarantees both scalability and security, making it an ideal solution for modern web applications.
 
 View Live Application: https://master.d73081eebwwdg.amplifyapp.com/
 
