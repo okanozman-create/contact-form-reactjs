@@ -6,7 +6,7 @@
 
 *:focus {
   outline: 2px solid #d71ef7;
- }
+}
 
 html {
   font-size: 62.5%;
@@ -17,11 +17,10 @@ body {
   font-weight: 400;
   line-height: 1;
   color: #adb5bd;
-  background: linear-gradient(135deg, #92effd 60%, #4e65ff);
+  background: #92effd;
   display: flex;
   align-items: center;
   justify-content: center;
- 
 }
 
 h1 {
@@ -35,9 +34,9 @@ h1 {
   font-family: "Russo One";
 }
 
-.ss-h1{
-  font-family: 'Times New Roman', Times, serif;
-  color:#e03131;
+.ss-h1 {
+  font-family: "Times New Roman", Times, serif;
+  color: #e03131;
 }
 
 h2 {
@@ -47,48 +46,38 @@ h2 {
   font-weight: 600;
 }
 
-.ss-h2{
-font-family: Arial, Helvetica, sans-serif;
-color:black;
+.ss-h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
 }
 
-h3{
-text-align: center;
-font-size: 1.8rem;
-color:#495057;
-line-height: 3rem;
-font-style: italic;
-
-
+h3 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: #495057;
+  line-height: 3rem;
+  font-style: italic;
 }
 
-
-h4{
-text-align: center;
-text-align: center;
-font-size: 1.6rem;
-color:#495057;
-margin-bottom: 2rem;
-font-style: italic;
-
+h4 {
+  text-align: center;
+  text-align: center;
+  font-size: 1.6rem;
+  color: #495057;
+  margin-bottom: 2rem;
+  font-style: italic;
 }
 
 h4 span {
-  color:#364fc7;
+  color: #364fc7;
   font-weight: 700;
 }
 
 .form {
-  /* max-width: 100%; */
   max-width: 120rem;
   margin: 3.2rem 2.4rem;
   padding: 1.6rem;
 }
-
-
-
-
-
 
 .label-input-group {
   display: flex;
@@ -98,25 +87,20 @@ h4 span {
 }
 
 label {
-  color:#343a40;
+  color: #343a40;
   font-weight: 700;
   font-size: 2.4rem;
-  font-family:   "Rubik Bubles" ;
-
+  font-family: "Rubik Bubles";
 }
 
 input,
 textarea {
-  flex: 1; 
+  flex: 1;
   padding: 0.4rem;
   font-size: 1.8rem;
- 
-  box-shadow:
-    inset 10px 10px 20px #e0e0e0,
-    inset -10px -10px 20px #ffffff;
+
+  box-shadow: inset 10px 10px 20px #e0e0e0, inset -10px -10px 20px #ffffff;
 }
-
-
 
 textarea {
   resize: none;
@@ -124,77 +108,62 @@ textarea {
   max-width: 100%;
 }
 
-
 input {
   border-radius: 9px;
   border: none;
 }
 
-
-/* .css-13cymwt-control{
-  border-color: #d71ef7 !important;
-  border: none !important;
-} */
-
-
-.countrySelect{
-
-  display: inline; 
-  flex: 1; 
+.countrySelect {
+  display: inline;
+  flex: 1;
   padding: 0.4rem;
   font-size: 1.8rem;
 
-  color:#A61E4D;
+  color: #a61e4d;
 }
 
-input[type="radio"]{
+input[type="radio"] {
   width: 3rem;
   height: 3rem;
   accent-color: green;
-  box-shadow: none; 
+  box-shadow: none;
 }
 
-
 input[type="radio"]:focus {
- outline: 3px ridge  #d71ef7 ;
-  }
+  outline: 3px ridge #d71ef7;
+}
 
+input[type="checkbox"] {
+  width: 3rem;
+  height: 3rem;
+  accent-color: green;
+  box-shadow: none;
+}
 
-
-  input[type="checkbox"] {
-    width: 3rem;
-    height: 3rem;
-    accent-color: green;
-    box-shadow: none;
-  }
-  
- input[type="checkbox"]:focus{
-  outline: 4px ridge  #d71ef7 ;
-  }
+input[type="checkbox"]:focus {
+  outline: 4px ridge #d71ef7;
+}
 
 .phone {
   display: inline;
   flex: 1;
   padding: 0.4rem;
- 
 }
 
-.phone:focus{
-  outline: 4px ridge  #d71ef7 ;
+.phone:focus {
+  outline: 4px ridge #d71ef7;
 }
 
 #gender {
   display: flex;
   gap: 5.2rem;
   align-items: center;
-
 }
 
 #gender label {
   display: flex;
   align-items: center;
-  gap: 1.2rem; 
-  
+  gap: 1.2rem;
 }
 
 #checkbox {
@@ -206,10 +175,8 @@ input[type="radio"]:focus {
 #checkbox label {
   display: flex;
   align-items: center;
-  gap: 1.2rem; 
+  gap: 1.2rem;
 }
-
-
 
 .success-container {
   margin: 10rem auto;
@@ -217,13 +184,11 @@ input[type="radio"]:focus {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 }
 
-
 .btn-successsubmit {
-margin-top: 3rem;
-   display: inline-block; 
+  margin-top: 3rem;
+  display: inline-block;
   padding: 1.6rem 3.2rem;
   font-size: 2rem;
   border-radius: 0.12rem;
@@ -237,7 +202,6 @@ margin-top: 3rem;
   transition: all 0.15s;
   border: 0.1rem solid #000000;
   cursor: pointer;
-
 }
 
 .btn-successsubmit:hover,
@@ -247,11 +211,9 @@ margin-top: 3rem;
   border-color: #ffffff;
 }
 
-
-
 .btn-container {
   margin-top: 2.4rem;
-   display: flex;
+  display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
@@ -303,10 +265,7 @@ margin-top: 3rem;
   border-color: #ffffff;
 }
 
-
-
 /* ERROR MSG */
-
 
 .error-msg {
   color: #cc0033;
@@ -315,7 +274,7 @@ margin-top: 3rem;
   line-height: 15px;
   margin: 5px 0 0;
 }
-/* Tooltip Styling */
+
 .error-container {
   background-color: #fce4e4;
   border: 1px solid #fcc2c3;
@@ -353,9 +312,6 @@ margin-top: 3rem;
   font-weight: bold;
 }
 
-
-
-
 .error.label-input-group input {
   border: 2px solid #cc0033;
   line-height: 37px;
@@ -368,7 +324,6 @@ margin-top: 3rem;
   outline: none;
 }
 
-
 .error.label-input-group .status {
   display: none;
 }
@@ -377,40 +332,42 @@ margin-top: 3rem;
   display: inline;
 }
 
-
-
-
-
-  /* @media (max-width: 44em) {
-    .form{
-      max-width: 100rem;
-      background-color:#A61E4D;
-    }
-    }   */
-
-
-         
-      @media (max-width: 29em) {
-        .form{
-          max-width: 100%;
-          /* background-color:blue; */
-          margin-right: 0;
-          background-color: yellow;
-        }
-
-            label {
-  font-size: 1.4rem; } 
-               
-}
-      
-
-      
-
-@media (max-width: 20em) {
-       
-          label {
+@media (max-width: 23em) {
+  label {
     font-size: 1.2rem;
   }
-  
-          }
-        
+
+  h1 {
+    margin-top: 1.4rem;
+    font-size: 2.2rem;
+    margin-bottom: 2.4rem;
+  }
+
+  h3,
+  h4 {
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 3rem;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 600;
+  }
+
+  .main-div {
+    max-width: 100%;
+    margin-left: 1.8rem;
+  }
+
+  .form {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 24em) {
+  label {
+    font-size: 1.4rem;
+  }
+}
