@@ -45,7 +45,6 @@ export default function App() {
     e.preventDefault();
 
     const formData = { ...values, selectedCountry };
-    // console.log(formData);
 
     try {
       const isInitialData = Object.keys(initialData).every(
@@ -57,7 +56,6 @@ export default function App() {
       const validatedData = await userSchema.validate(formData, {
         abortEarly: false,
       });
-      //  console.log("Validation successful:", validatedData);
 
       const response = await fetch(
         "https://kufhnbgos4.execute-api.eu-north-1.amazonaws.com/Prod2",
@@ -87,7 +85,7 @@ export default function App() {
       error.inner.forEach((err) => {
         errors[err.path] = err.message;
       });
-      //  console.error("Error:", errors)
+
       setValidationErrors(errors);
     }
   }
@@ -119,9 +117,7 @@ export default function App() {
 
           setCountries(data.countries);
           setSelectedCountry(initalValueCountry);
-        } catch (error) {
-          //  console.error("Error fetching country data:", error);
-        }
+        } catch (error) {}
       }
 
       fetchData();

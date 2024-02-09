@@ -125,25 +125,6 @@ export default function Form({
             </label>
           </div>
 
-          {/* <div
-             className="label-input-group"
-            >
-              <label htmlFor="lemon">Mobile Number</label>
-              { <input
-                id="lemon"
-                type="text"
-                name="mobileNumber"
-                value={values.mobileNumber}
-                onChange={(e) => {
-                  setValues((values) => ({
-                    ...values,
-                    mobileNumber: e.target.value,
-                  }));
-                   }}
-              /> }
-            </div>
-   */}
-
           <Phone values={values} setValues={setValues} />
 
           <div
