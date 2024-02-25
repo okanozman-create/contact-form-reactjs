@@ -1,3 +1,5 @@
+/* ---------GENERAL--------- */
+
 * {
   margin: 0;
   padding: 0;
@@ -22,6 +24,16 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+/* ------Main------- */
+
+.form {
+  max-width: 120rem;
+  margin: 3.2rem 2.4rem;
+  padding: 1.6rem;
+}
+
+/* -------Headers--------- */
 
 h1 {
   text-align: center;
@@ -73,11 +85,7 @@ h4 span {
   font-weight: 700;
 }
 
-.form {
-  max-width: 120rem;
-  margin: 3.2rem 2.4rem;
-  padding: 1.6rem;
-}
+/* ------Label--Input------ */
 
 .label-input-group {
   display: flex;
@@ -112,15 +120,6 @@ input {
   border: none;
 }
 
-.countrySelect {
-  display: inline;
-  flex: 1;
-  padding: 0.4rem;
-  font-size: 1.8rem;
-
-  color: #a61e4d;
-}
-
 input[type="radio"] {
   width: 3rem;
   height: 3rem;
@@ -141,6 +140,15 @@ input[type="checkbox"] {
 
 input[type="checkbox"]:focus {
   outline: 4px ridge #345b63;
+}
+
+.countrySelect {
+  display: inline;
+  flex: 1;
+  padding: 0.4rem;
+  font-size: 1.8rem;
+
+  color: #a61e4d;
 }
 
 .phone {
@@ -176,6 +184,8 @@ input[type="checkbox"]:focus {
   align-items: center;
   gap: 1.2rem;
 }
+
+/* -----Success------- */
 
 .success-container {
   margin: 10rem auto;
@@ -306,42 +316,79 @@ input[type="checkbox"]:focus {
   display: flex;
 }
 
-@media (max-width: 23em) {
-  label {
-    font-size: 1.2rem;
+
+@media (max-width: 40em) {
+  .form {
+    max-width: 100%;
+    margin: 1.2rem 1.4rem;
+    padding: 1rem;
   }
 
+  /* ---Headers----- */
+
   h1 {
-    margin-top: 1.4rem;
-    font-size: 2.2rem;
-    margin-bottom: 2.4rem;
+    margin-top: 1rem;
+    font-size: 2rem;
+    margin-bottom: 2rem;
   }
 
   h3,
   h4 {
     text-align: center;
     font-size: 1.4rem;
-    line-height: 3rem;
+    line-height: 2rem;
   }
 
   h2 {
     text-align: center;
-    font-size: 2.4rem;
+    font-size: 1.8rem;
     font-weight: 600;
   }
 
-  .main-div {
-    max-width: 100%;
-    margin-left: 1.8rem;
+  /* ------Label-Input------- */
+
+  .label-input-group {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    margin-bottom: 1.2rem;
   }
 
-  .form {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 24em) {
   label {
-    font-size: 1.4rem;
+    color: #343a40;
+    font-weight: 700;
+    font-size: 1.2rem;
+    font-family: "Rubik Bubles";
+  }
+
+  input,
+  textarea {
+    flex: 1;
+    padding: 0.4rem;
+    font-size: 1.5rem;
+    box-shadow: inset 10px 10px 20px #e0e0e0, inset -10px -10px 20px #ffffff;
+  }
+
+  /* --------Error-Msg--------------- */
+
+  .error-container {
+    background-color: #ffebee;
+    border: 1px solid #ffcdd2;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 4px;
+    margin-top: 4px;
+    color: #d32f2f;
+    font-weight: normal;
+    max-width: 7rem;
+  }
+
+  .error-msg {
+    color: #d32f2f;
+    line-height: 1;
+    display: block;
+    font-size: 8px;
   }
 }

@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import * as yup from "yup";
-import Select from "react-select";
-import Form from "./Form";
+import Form from "./components/Form";
 import "react-phone-input-2/lib/style.css";
+import SuccessSubmit from "./components/SuccessSubmit";
+import CountrySelect from "./components/CountrySelect";
 
 const initialData = {
   firstName: "",
@@ -19,7 +20,7 @@ const initialData = {
 const initalValueCountry = { value: "", label: "---Choose Country---" };
 
 export default function App() {
-  const [countries, setCountries] = useState([]);
+  const [countries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState(initalValueCountry);
   const [validationErrors, setValidationErrors] = useState({});
   const [values, setValues] = useState(initialData);
@@ -40,6 +41,18 @@ export default function App() {
     mobileNumber: yup.string(),
     selectedGender: yup.string(),
   });
+
+
+
+  function handleDeleteForm() {
+    setValues(initialData);
+
+    setSelectedCountry(initalValueCountry);
+
+    setTimeout(() => {
+      setValidationErrors({});
+    }, 0);
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -78,7 +91,6 @@ export default function App() {
       setValues(initialData);
       setSelectedCountry(initalValueCountry);
       setValidationErrors({});
-      setSuccessSubmit(SuccessSubmit);
       setSuccessSubmit(true);
     } catch (error) {
       const errors = {};
@@ -88,60 +100,6 @@ export default function App() {
 
       setValidationErrors(errors);
     }
-  }
-
-  function backToForm() {
-    setSuccessSubmit(false);
-    setValues(initialData);
-    setValidationErrors({});
-  }
-
-  function handleDeleteForm() {
-    setValues(initialData);
-
-    setSelectedCountry(initalValueCountry);
-
-    setTimeout(() => {
-      setValidationErrors({});
-    }, 0);
-  }
-
-  const CountrySelect = () => {
-    useEffect(() => {
-      async function fetchData() {
-        try {
-          const response = await fetch(
-            "https://valid.layercode.workers.dev/list/countries?format=select&flags=true&value=code"
-          );
-          const data = await response.json();
-
-          setCountries(data.countries);
-          setSelectedCountry(initalValueCountry);
-        } catch (error) {}
-      }
-
-      fetchData();
-    }, []);
-
-    return (
-      <Select
-        options={countries}
-        value={selectedCountry}
-        onChange={(a) => setSelectedCountry(a)}
-      />
-    );
-  };
-
-  function SuccessSubmit() {
-    return (
-      <div className="success-container">
-        <h1 className="ss-h1">Success Submit 🚀🚀🚀</h1>
-        <h2 className="ss-h2">Thank you for your feedback.</h2>
-        <button className="btn-successsubmit" onClick={backToForm}>
-          Back To Form{" "}
-        </button>
-      </div>
-    );
   }
 
   return successSubmit ? (
