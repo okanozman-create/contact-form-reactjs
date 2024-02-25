@@ -1,28 +1,6 @@
-import React,{ useState } from "react";
+import React from "react";
 
-const initialData = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  mobileNumber: "",
-  birth: "",
-  password: "",
-  selectedProduct: "",
-  selectedGender: "",
-  feedback: "",
-};
-
-function SuccessSubmit() {
-  const [ setValues] = useState(initialData);
-  const [ setSuccessSubmit] = useState(false);
-  const [ setValidationErrors] = useState({});
-
-  function backToForm() {
-    setSuccessSubmit(false);
-    setValues(initialData);
-    setValidationErrors({});
-  }
-
+function SuccessSubmit({ backToForm }) {
   return (
     <div className="success-container">
       <h1 className="ss-h1">Success Submit 🚀🚀🚀</h1>

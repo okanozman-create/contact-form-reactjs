@@ -102,8 +102,15 @@ export default function App() {
     }
   }
 
+  function backToForm() {
+    setSuccessSubmit(false);
+    setValues(initialData);
+    setValidationErrors({});
+  }
+
+
   return successSubmit ? (
-    <SuccessSubmit />
+    <SuccessSubmit  backToForm={backToForm} />
   ) : (
     <div className="App">
       <h1>Contact Form</h1>
