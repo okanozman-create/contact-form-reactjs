@@ -19,7 +19,7 @@ body {
   font-weight: 400;
   line-height: 1;
   color: #adb5bd;
-  background: #b7ccd0;
+  background:#93c5fd;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,7 +39,7 @@ h1 {
   text-align: center;
   margin-top: 2.4rem;
   font-size: 4.4rem;
-  margin-bottom: 4.8rem;
+  margin-bottom: 2.4rem;
   font-weight: 700;
   color: #45260a;
   text-transform: uppercase;
@@ -97,7 +97,7 @@ h4 span {
 label {
   color: #343a40;
   font-weight: 700;
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   font-family: "Rubik Bubles";
 }
 
@@ -105,7 +105,7 @@ input,
 textarea {
   flex: 1;
   padding: 0.4rem;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   box-shadow: inset 10px 10px 20px #e0e0e0, inset -10px -10px 20px #ffffff;
 }
 

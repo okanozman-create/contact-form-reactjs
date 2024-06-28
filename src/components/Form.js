@@ -273,10 +273,10 @@ export default function Form({
           </div>
 
           <div className="btn-container">
-            <button className="submit" type="submit">
+            <button className="submit" type="submit" style={{ borderRadius: "10px" }} >
               Submit
             </button>
-            <button className="reset" type="reset" onClick={handleDeleteForm}>
+            <button className="reset" type="reset" onClick={handleDeleteForm} style={{ borderRadius: "10px" }}>
               Undo
             </button>
           </div>
