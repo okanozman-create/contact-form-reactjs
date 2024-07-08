@@ -1,4 +1,5 @@
 import Phone from "./Phone";
+
 export default function Form({
   countries,
   selectedCountry,
@@ -18,7 +19,7 @@ export default function Form({
               validationErrors.firstName && "error"
             }`}
           >
-            <label htmlFor="orange">First Name</label>
+            <label htmlFor="orange">First Name &nbsp;&nbsp;</label>
 
             <input
               id="orange"
@@ -45,7 +46,7 @@ export default function Form({
               validationErrors.lastName && "error"
             }`}
           >
-            <label htmlFor="banana">Last Name</label>
+            <label htmlFor="banana" >Last Name &nbsp;&nbsp;</label>
             <input
               id="banana"
               type="text"
@@ -57,6 +58,7 @@ export default function Form({
                   lastName: e.target.value,
                 }));
               }}
+              style={{marginLeft: '4px'}}
             />
             {validationErrors.lastName && (
               <div className="error-container">
@@ -87,7 +89,72 @@ export default function Form({
               </div>
             )}
           </div>
+          
 
+
+          <div
+  className={`label-input-group ${validationErrors.email && "error"}`}
+>
+  <label htmlFor="melon">Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+  <input
+    id="melon"
+    type="email"
+    name="email"
+    value={values.email}
+    onChange={(e) => {
+      setValues((values) => ({
+        ...values,
+        email: e.target.value,
+      }));
+    }}
+  />
+
+  {validationErrors.email && (
+    <div className="error-container">
+      <span className="error-msg">{validationErrors.email}</span>
+    </div>
+  )}
+</div>
+
+
+
+
+
+
+          <div
+            className={`label-input-group ${
+              validationErrors.password && "error"
+            }`}
+          >
+            <label htmlFor="cherry">Password &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <input
+              id="cherry"
+              type="password"
+              name="password"
+              value={values.password}
+              onChange={(e) => {
+                setValues((values) => ({
+                  ...values,
+                  password: e.target.value,
+                }));
+              }}
+            />
+            {validationErrors.password && (
+              <div className="error-container">
+                <span className="error-msg">{validationErrors.password}</span>
+              </div>
+            )}
+          </div>
+
+
+
+
+
+
+
+          <Phone values={values} setValues={setValues} style={{}} />
+
+{/* 
           <div className="label-input-group" id="gender">
             <label>Gender</label>
             <label htmlFor="milk">
@@ -103,6 +170,7 @@ export default function Form({
                     selectedGender: e.target.value,
                   }));
                 }}
+                style={{marginLeft: '50px'}}
               />
               Female
             </label>
@@ -125,58 +193,12 @@ export default function Form({
             </label>
           </div>
 
-          <Phone values={values} setValues={setValues} />
+          */}
 
-          <div
-            className={`label-input-group ${validationErrors.email && "error"}`}
-          >
-            <label htmlFor="melon">Email</label>
-            <input
-              id="melon"
-              type="email"
-              name="email"
-              value={values.email}
-              onChange={(e) => {
-                setValues((values) => ({
-                  ...values,
-                  email: e.target.value,
-                }));
-              }}
-            />
 
-            {validationErrors.email && (
-              <div className="error-container">
-                <span className="error-msg">{validationErrors.email}</span>
-              </div>
-            )}
-          </div>
 
-          <div
-            className={`label-input-group ${
-              validationErrors.password && "error"
-            }`}
-          >
-            <label htmlFor="cherry">Password</label>
-            <input
-              id="cherry"
-              type="password"
-              name="password"
-              value={values.password}
-              onChange={(e) => {
-                setValues((values) => ({
-                  ...values,
-                  password: e.target.value,
-                }));
-              }}
-            />
-            {validationErrors.password && (
-              <div className="error-container">
-                <span className="error-msg">{validationErrors.password}</span>
-              </div>
-            )}
-          </div>
 
-          <div
+<div
             className={`label-input-group ${
               validationErrors.selectedProduct && "error"
             }`}
@@ -224,6 +246,20 @@ export default function Form({
             )}
           </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
           <div
             className={`label-input-group ${
               validationErrors.selectedCountry && "error"
@@ -272,11 +308,19 @@ export default function Form({
             )}
           </div>
 
+
+
+
+
+
+
+
+
           <div className="btn-container">
-            <button className="submit" type="submit" style={{ borderRadius: "10px" }} >
+            <button className="submit" type="submit">
               Submit
             </button>
-            <button className="reset" type="reset" onClick={handleDeleteForm} style={{ borderRadius: "10px" }}>
+            <button className="reset" type="reset" onClick={handleDeleteForm}>
               Undo
             </button>
           </div>

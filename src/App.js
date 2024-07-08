@@ -13,7 +13,6 @@ const initialData = {
   birth: "",
   password: "",
   selectedProduct: "",
-  selectedGender: "",
   feedback: "",
 };
 
@@ -39,8 +38,7 @@ export default function App() {
     feedback: yup.string().required("Feedback is required"),
     selectedProduct: yup.string().required("Select a product required"),
     mobileNumber: yup.string(),
-    selectedGender: yup.string(),
-  });
+   });
 
 
 
