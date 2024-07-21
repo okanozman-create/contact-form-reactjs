@@ -313,22 +313,29 @@ input[type="checkbox"]:focus {
 }
 
 /* styles.css */
-@media (max-width: 24em) {
+@media (max-width: 36em) {
+  .App {
+    margin: auto;
+  }
   label {
     font-size: 1.2rem;
+  }
+
+  #lemon {
+    width: 20rem;
   }
 
   h1 {
     margin-top: 1.4rem;
     font-size: 2.2rem;
-    margin-bottom: 2.4rem;
+    margin-bottom: 1rem;
   }
 
   h3,
   h4 {
     text-align: center;
     font-size: 1.4rem;
-    line-height: 3rem;
+    line-height: 2rem;
   }
 
   h2 {
@@ -344,7 +351,7 @@ input[type="checkbox"]:focus {
 
   .form {
     max-width: 30rem;
-    margin: 1rem;
+    margin: 0;
     padding: 1rem;
   }
 

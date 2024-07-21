@@ -152,7 +152,7 @@ export default function Form({
 
 
 
-          <Phone values={values} setValues={setValues} style={{}} />
+          <Phone values={values} setValues={setValues}  />
 
 {/* 
           <div className="label-input-group" id="gender">
